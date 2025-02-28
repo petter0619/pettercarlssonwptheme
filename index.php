@@ -1,3 +1,3 @@
 <?php
- echo "Hello world! I'm Petter Carlsson";
+ echo "Hello world! This is the blog homepage. See PAGE Blog Home in Wp Admin for content?";
 ?>
