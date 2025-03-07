@@ -40,7 +40,7 @@
         <!-- nav header -->
         <div class="nav-header">
           <a href="#top">
-            <img src="<?php echo get_theme_file_uri('/images/logo-via-logohub.png'); ?>" alt="nav logo" class="nav-logo" />
+            <img src="<?php echo get_theme_file_uri('/images/move-to-wp/logo-via-logohub.png'); ?>" alt="nav logo" class="nav-logo" />
           </a>
           <button class="nav-btn" id="nav-btn">
             <i class="fas fa-bars"></i>
