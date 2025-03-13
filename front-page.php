@@ -11,23 +11,23 @@
       <a href="<?php echo get_field('header_button')['link']; ?>" class="btn hero-btn"><?php echo get_field('header_button')['text']; ?></a>
       <!-- social icons -->
       <ul class="social-icons hero-icons">
-        <?php if(get_field('header_linkedin')): ?>
+        <?php if(get_field('global_linkedin')): ?>
           <li>
-            <a href="<?php the_field('header_linkedin'); ?>" class="social-icon" target="_blank">
+            <a href="<?php the_field('global_linkedin'); ?>" class="social-icon" target="_blank">
               <i class="fab fa-linkedin"></i>
             </a>
           </li>
         <?php endif; ?>
-        <?php if(get_field('header_github')): ?>
+        <?php if(get_field('global_github')): ?>
           <li>
-            <a href="<?php the_field('header_github'); ?>" class="social-icon" target="_blank">
+            <a href="<?php the_field('global_github'); ?>" class="social-icon" target="_blank">
               <i class="fab fa-github"></i>
             </a>
           </li>
         <?php endif; ?>
-        <?php if(get_field('header_email')): ?>
+        <?php if(get_field('global_email')): ?>
           <li>
-            <a href="mailto:<?php the_field('header_email'); ?>" class="social-icon" target="_blank">
+            <a href="mailto:<?php the_field('global_email'); ?>" class="social-icon" target="_blank">
               <i class="fas fa-envelope"></i>
             </a>
           </li>
