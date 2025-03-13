@@ -6,30 +6,37 @@
   <div class="section-center hero-center">
     <article class="hero-info">
       <div class="underline"></div>
-      <h1>i'm petter</h1>
-      <h4>Full Stack JavaScript & .NET Developer</h4>
-      <a href="mailto:petter.carlsson@exopen.se" class="btn hero-btn">hire me</a>
+      <h1><?php the_field('header_headline'); ?></h1>
+      <h4><?php the_field('header_subheadline'); ?></h4>
+      <a href="<?php echo get_field('header_button')['link']; ?>" class="btn hero-btn"><?php echo get_field('header_button')['text']; ?></a>
       <!-- social icons -->
       <ul class="social-icons hero-icons">
-        <li>
-          <a href="https://www.linkedin.com/in/petter0619/" class="social-icon" target="_blank">
-            <i class="fab fa-linkedin"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/petter0619/" class="social-icon" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        </li>
-        <li>
-          <a href="mailto:petter.carlsson@appliedtechnology.se" class="social-icon">
-            <i class="fas fa-envelope"></i>
-          </a>
-        </li>
+        <?php if(get_field('header_linkedin')): ?>
+          <li>
+            <a href="<?php the_field('header_linkedin'); ?>" class="social-icon" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+        <?php endif; ?>
+        <?php if(get_field('header_github')): ?>
+          <li>
+            <a href="<?php the_field('header_github'); ?>" class="social-icon" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        <?php endif; ?>
+        <?php if(get_field('header_email')): ?>
+          <li>
+            <a href="mailto:<?php the_field('header_email'); ?>" class="social-icon" target="_blank">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        <?php endif; ?>
       </ul>
     </article>
     <article class="hero-img">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/me/hero-img.png'); ?>" class="hero-photo" alt="petter carlsson" />
+      <!-- <img src="<?php echo get_theme_file_uri('/images/move-to-wp/me/hero-img.png'); ?>" class="hero-photo" alt="petter carlsson" /> -->
+      <img src="<?php the_field('header_image'); ?>" class="hero-photo" alt="petter carlsson" />
     </article>
   </div>
 </header>
