@@ -386,15 +386,14 @@
   <div class="video-banner">
   <!-- section title -->
   <div class="section-title">
-    <h2>let's get in touch</h2>
+    <h2><?php the_field('contact_section_title'); ?></h2>
     <div class="underline"></div>
   </div>
   <!-- end of section title -->
   <p class="video-text">
-    I would love to hear from you! If you are interested in getting in touch with me just click the button below
-    and send me an email and I will get back to you as quickly as I can.
+    <?php the_field('contact_section_text'); ?>
   </p>
-  <a href="mailto:petter.carlsson@exopen.se" class="btn">contact me</a>
+  <a href="<?php echo get_field('contact_section_button')['link']; ?>" class="btn"><?php echo get_field('contact_button')['text']; ?></a>
 </div>
 </section>
 <!-- end of connect -->
