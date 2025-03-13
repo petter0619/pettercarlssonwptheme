@@ -35,8 +35,7 @@
       </ul>
     </article>
     <article class="hero-img">
-      <!-- <img src="<?php echo get_theme_file_uri('/images/move-to-wp/me/hero-img.png'); ?>" class="hero-photo" alt="petter carlsson" /> -->
-      <img src="<?php the_field('header_image'); ?>" class="hero-photo" alt="petter carlsson" />
+      <img src="<?php echo esc_url(get_field('header_image')['url']); ?>" class="hero-photo" alt="<?php echo esc_attr(get_field('header_image')['alt']); ?>" />
     </article>
   </div>
 </header>
@@ -47,25 +46,17 @@
   <div class="section-center about-center">
     <!-- about img -->
     <article class="about-img">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/me/about-img.png'); ?>" alt="about petter carlsson" class="hero-photo" />
+      <img src="<?php echo esc_url(get_field('about_section_image')['url']); ?>" alt="<?php echo esc_attr(get_field('about_section_image')['alt']); ?>" class="hero-photo" />
     </article>
     <!-- info -->
     <article class="about-info">
       <!-- section title -->
       <div class="section-title about-title">
-        <h2>about</h2>
+        <h2><?php the_field('about_section_title'); ?></h2>
         <div class="underline"></div>
       </div>
       <!-- end of section title -->
-      <p>
-        I am an imaginative coder with a passion for latin american dance and martial arts who spends his weekends
-        volunteering at a cat shelter in Stockholm, where I am based.
-      </p>
-      <p>
-        A passion for coding led me to pursue web development after 8-years of working as an SEO and Web Analyst.
-        The thrill of finally getting a piece of code to work after hours of frustration and the challenge of
-        finding creative solutions to problems are what I love most about coding.
-      </p>
+      <?php the_field('about_section_text'); ?>
     </article>
   </div>
 </section>
