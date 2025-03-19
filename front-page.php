@@ -10,29 +10,15 @@
       <h4><?php the_field('header_subheadline'); ?></h4>
       <a href="<?php echo get_field('header_button')['link']; ?>" class="btn hero-btn"><?php echo get_field('header_button')['text']; ?></a>
       <!-- social icons -->
-      <ul class="social-icons hero-icons">
-        <?php if(get_field('global_linkedin')): ?>
-          <li>
-            <a href="<?php the_field('global_linkedin'); ?>" class="social-icon" target="_blank">
-              <i class="fab fa-linkedin"></i>
-            </a>
-          </li>
-        <?php endif; ?>
-        <?php if(get_field('global_github')): ?>
-          <li>
-            <a href="<?php the_field('global_github'); ?>" class="social-icon" target="_blank">
-              <i class="fab fa-github"></i>
-            </a>
-          </li>
-        <?php endif; ?>
-        <?php if(get_field('global_email')): ?>
-          <li>
-            <a href="mailto:<?php the_field('global_email'); ?>" class="social-icon" target="_blank">
-              <i class="fas fa-envelope"></i>
-            </a>
-          </li>
-        <?php endif; ?>
-      </ul>
+      <?php 
+        get_template_part('partials/socialIconsList', null, array(
+          'linkedin_link' => get_field('global_linkedin'),
+          'github_link' => get_field('global_github'),
+          'email_address' => get_field('global_email'),
+          'extra_list_classes' => 'hero-icons',
+        ));
+      ?>
+      <!-- end of social icons -->
     </article>
     <article class="hero-img">
       <img src="<?php echo esc_url(get_field('header_image')['url']); ?>" class="hero-photo" alt="<?php echo esc_attr(get_field('header_image')['alt']); ?>" />
