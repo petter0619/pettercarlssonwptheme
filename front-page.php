@@ -56,43 +56,31 @@
   </div>
   <!-- end of section title -->
   <div class="section-center services-center">
+    <?php
+      $homepageServices = new WP_Query(array(
+        'posts_per_page' => 3,
+        'post_type' => 'service',
+        'orderby' => 'date',
+        'order' => 'ASC'
+      ));
+
+      while($homepageServices->have_posts()): $homepageServices->the_post();
+    ?>
     <!-- single service -->
-    <article class="service">
-      <i class="fas fa-code service-icon"></i>
-      <h4>web development</h4>
-      <div class="underline"></div>
-      <p>
-        The appearance, usability and accessibility of your website is more important than ever. I develop
-        client-focused, customer-centric, solutions for both the front end and the back end to help you deliver
-        tangible business results.
-      </p>
-    </article>
-    <!-- end of single service -->
-    <!-- single service -->
-    <article class="service">
-      <i class="fas fa-chart-pie service-icon"></i>
-      <h4>web analytics</h4>
-      <div class="underline"></div>
-      <p>
-        I work with clients at every stage of the measurement lifecycle, from Google Analytics audits, strategy and
-        configurations, to advanced reporting setups. I’ll also find the goals, user flows and KPIs that really
-        matter for your online business.
-      </p>
-    </article>
-    <!-- end of single service -->
-    <!-- single service -->
-    <article class="service">
-      <i class="fas fa-search service-icon"></i>
-      <h4>SEO</h4>
-      <div class="underline"></div>
-      <p>
-        Don't let organic search be a missed opportunity to increase revenue and brand awareness. Whether it is
-        optimising the ranking of YouTube videos or ordinary web rankings I can help improve your organic
-        performance.
-      </p>
-    </article>
-    <!-- end of single service -->
-  </div>
+      <article class="service">
+        <i class="fas fa-code service-icon"></i>
+        <h4><?php the_title(); ?></h4>
+        <div class="underline"></div>
+        <p>
+          <?php the_excerpt(); ?>
+        </p>
+      </article>
+      <!-- end of single service -->
+    <?php
+      endwhile;
+      wp_reset_postdata();
+    ?>
+</div>
 </section>
 <!-- end of services -->
 <a class="anchor" id="onpage-navlink-latest-work"></a>

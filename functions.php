@@ -11,6 +11,27 @@
   }
   add_action('wp_enqueue_scripts', 'theme_scripts_and_stylesheets');
 
+  function theme_post_types() {
+    register_post_type('service', array(
+      'public' => true,
+      'show_in_rest' => true,
+      'labels' => array(
+        'name' => 'Services',
+        'add_new_item' => 'Add New Service',
+        'edit_item' => 'Edit Service',
+        'all_items' => 'All Services',
+        'singular_name' => 'Service'
+      ),
+      'menu_icon' => 'dashicons-hammer',
+      'has_archive' => false,
+      'rewrite' => array(
+       'slug' => 'services',
+      ),
+      'supports' => array('title', 'editor', 'excerpt'),
+    ));
+  }
+  add_action('init', 'theme_post_types');
+
 
   /* -------------------------------------- */
   /* --------- Custom Functions ----------- */
