@@ -85,66 +85,49 @@
 <!-- end of services -->
 <a class="anchor" id="onpage-navlink-latest-work"></a>
 <!-- projects -->
-<section class="section projects">
-  <!-- section title -->
-  <div class="section-title">
-    <h2>latest works</h2>
-    <div class="underline"></div>
-    <p class="projects-text">
-      This is a collection of the latest additions to my portfolio.
-      <span class="desktop-only">Hover over a project for more details.</span> A full description of the project as
-      well as the tech stack used and a link to live demo can be found in the project Readme on Github. Just click
-      the project and its Gitub repo will open up in a new window.
-    </p>
-  </div>
-  <!-- end of section title -->
-  <div class="section-center projects-center">
-    <!-- single project -->
-    <a href="https://github.com/petter0619/my-4dx" class="project-1" target="_blank">
-      <article class="project">
-        <img src="<?php echo get_theme_file_uri('/images/move-to-wp/project-section/project-1.jpeg'); ?>" alt="single project" class="project-img" />
-        <div class="project-info">
-          <h4>my 4DX</h4>
-          <p>An online project management tool based on the 4 Disciplines of Execution.</p>
-        </div>
-      </article>
-    </a>
-    <!-- end of single project -->
-    <!-- single project -->
-    <a href="https://github.com/petter0619/react-todo-list" class="project-2" target="_blank">
-      <article class="project">
-        <img src="<?php echo get_theme_file_uri('/images/move-to-wp/project-section/project-2.jpeg'); ?>" alt="single project" class="project-img" />
-        <div class="project-info">
-          <h4>react todo list</h4>
-          <p>A classic exercise redone using class based React and SASS.</p>
-        </div>
-      </article>
-    </a>
-    <!-- end of single project -->
-    <!-- single project -->
-    <a href="https://github.com/petter0619/vanilla-js-todo-list" class="project-3" target="_blank">
-      <article class="project">
-        <img src="<?php echo get_theme_file_uri('/images/move-to-wp/project-section/project-3.jpeg'); ?>" alt="single project" class="project-img" />
-        <div class="project-info">
-          <h4>vanilla JS todo list</h4>
-          <p>The classic todo app exercise.</p>
-        </div>
-      </article>
-    </a>
-    <!-- end of single project -->
-    <!-- single project -->
-    <a href="https://github.com/petter0619/copy-a-design" class="project-4" target="_blank">
-      <article class="project">
-        <img src="<?php echo get_theme_file_uri('/images/move-to-wp/project-section/project-4.jpeg'); ?>" alt="single project" class="project-img" />
-        <div class="project-info">
-          <h4>CSS Gallery Design Copy</h4>
-          <p>A demo of how closely I can replicate/copy a given design.</p>
-        </div>
-      </article>
-    </a>
-     <!-- end of single project -->
-  </div>
-</section>
+<?php 
+  $projectsQuery = new WP_Query(array(
+    'posts_per_page' => 4,
+    'post_type' => 'project',
+    'meta_key'      => 'project_showOnHome',
+    'meta_value'    => true,
+  ));
+  
+  if($projectsQuery->found_posts === 4):
+?>
+  <section class="section projects">
+    <!-- section title -->
+    <div class="section-title">
+      <h2>latest works</h2>
+      <div class="underline"></div>
+      <p class="projects-text">
+        This is a collection of the latest additions to my portfolio.
+        <span class="desktop-only">Hover over a project for more details.</span> A full description of the project as
+        well as the tech stack used and a link to live demo can be found in the project Readme on Github. Just click
+        the project and its Gitub repo will open up in a new window.
+      </p>
+    </div>
+    <!-- end of section title -->
+    <div class="section-center projects-center">
+      <?php 
+        $projectCounter = 0;
+
+        while( $projectsQuery->have_posts() ) : $projectsQuery->the_post(); 
+          $projectCounter++;
+      ?>
+        <a href="<?php the_permalink(); ?>" class="project-<?php echo $projectCounter; ?>" target="_blank">
+          <article class="project">
+            <img src="<?php echo get_theme_file_uri("/images/move-to-wp/project-section/project-$projectCounter.jpeg"); ?>" alt="single project" class="project-img" />
+            <div class="project-info">
+              <h4><?php the_title(); ?></h4>
+              <p><?php the_excerpt(); ?></p>
+            </div>
+          </article>
+        </a>
+      <?php endwhile; ?>
+    </div>
+  </section>
+<?php endif; ?>
 <!-- end of projects -->
 <a class="anchor" id="onpage-navlink-skills"></a>
 <!-- tech stack -->

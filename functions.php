@@ -47,6 +47,24 @@
       ),
       'supports' => array('title', 'editor', 'excerpt'),
     ));
+
+    register_post_type('project', array(
+      'public' => true,
+      'show_in_rest' => true,
+      'labels' => array(
+        'name' => 'Projects',
+        'add_new_item' => 'Add New Project',
+        'edit_item' => 'Edit Project',
+        'all_items' => 'All Projects',
+        'singular_name' => 'Project'
+      ),
+      'menu_icon' => 'dashicons-html',
+      'has_archive' => false,
+      'rewrite' => array(
+       'slug' => 'projects',
+      ),
+      'supports' => array('title', 'editor', 'excerpt'),
+    ));
   }
   add_action('init', 'theme_post_types');
 
