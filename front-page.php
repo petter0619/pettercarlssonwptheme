@@ -66,7 +66,7 @@
 
       while($homepageServices->have_posts()): $homepageServices->the_post();
     ?>
-    <!-- single service -->
+      <!-- single service -->
       <article class="service">
         <i class="fas fa-code service-icon"></i>
         <h4><?php the_title(); ?></h4>
@@ -241,112 +241,41 @@
   </div>
   <!-- end of section title -->
   <div class="section-center timeline-center">
-    <!-- single timeline item -->
-    <article class="timeline-item">
-      <h4>Back End Developer</h4>
-      <span class="tag">Exopen Systems</span>
-      <p>
-        Primarily backend development using .NET, Node JS (with Typescript), Scala and SQL (SQL Server and Postgres)
-        to maintain and further develop Exopen's product offerings and suite of integrations. Some frontend
-        development as well using React with Typescript. Other technologies used include various Azure services
-        (e.g. Data Factory, Web App, App Insights) and Auth0.
-      </p>
-      <span class="tag">Sep 2023 > Present</span>
-      <span class="number">8</span>
-    </article>
-    <!-- end of single timeline item -->
-    <!-- single timeline item -->
-    <article class="timeline-item">
-      <h4>Full Stack Developer</h4>
-      <span class="tag">DDSthlm</span>
-      <p>
-        .NET and JavaScript consultant for DDSthlm. Projects include work for CityGross, Haldex and Medieinstitutet.
-        Technologies worked with include: GraphQL (.NET && TypeScript w. Apollo Server), React, and NextJS.
-      </p>
-      <span class="tag">Apr 2022 > Aug 2023</span>
-      <span class="number">7</span>
-    </article>
-    <!-- end of single timeline item -->
-    <!-- single timeline item -->
-    <article class="timeline-item">
-      <h4>Software Developer</h4>
-      <span class="tag">AFRY via Salt</span>
-      <p>
-        10 month contract working at AFRY as a fullstack developer on various projects. Technologies used during
-        this assignment include: C#, .NET Core 6, Entity Framework, SQL Server, Azure (incl. Web Apps, Function
-        Apps, Blob Storage), React, TypeScript, ASP Web Forms. Other: SCRUM, microservices, serverless
-      </p>
-      <span class="tag">Jun 2021 > Mar 2022</span>
-      <span class="number">6</span>
-    </article>
-    <!-- end of single timeline item -->
-    <!-- single timeline item -->
-    <article class="timeline-item">
-      <h4>Full Stack Web Developer</h4>
-      <span class="tag">Salt</span>
-      <p>
-        Out of 1500 applicants, I and 19 others were selected for this intensive 3-month training program in full
-        stack web development with a focus on TDD, mob programming, and applied learning. Having completed the
-        bootcamp I have now made the transition into JavaScript development and am currently working as a full stack
-        JavaScript developer consultant for Salt.
-      </p>
-      <span class="tag">Jan 2021 > Mar 2022</span>
-      <span class="number">5</span>
-    </article>
-    <!-- end of single timeline item -->
-    <!-- single timeline item -->
-    <article class="timeline-item">
-      <h4>Reboot Year</h4>
-      <span class="tag">---</span>
-      <p>
-        After 8-years of working in online marketing I decided to make the transition into web development. My
-        journey started with a year of teaching myself HTML, CSS and JavaScript (front end and back end),
-        culminating in me getting accepted to the Salt accelerated career program to become a full stack JavaScript
-        developer.
-      </p>
-      <span class="tag">Jan 2020 > Dec 2020</span>
-      <span class="number">4</span>
-    </article>
-    <!-- end of single timeline item -->
-    <!-- single timeline item -->
-    <article class="timeline-item">
-      <h4>Head of SEO and Web Analytics</h4>
-      <span class="tag">Filippa K</span>
-      <p>
-        Oversaw the search engine optimization of the company's new e-commerce websites, as well developed new ways
-        to view and follow up the customer journey from beginning to end. The tools I primarily worked with included
-        Google Analytics, Qlikview as well as various SEO tools.
-      </p>
-      <span class="tag">Sep 2018 > Dec 2019</span>
-      <span class="number">3</span>
-    </article>
-    <!-- end of single timeline item -->
-    <!-- single timeline item -->
-    <article class="timeline-item">
-      <h4>Online Marketing Specialist</h4>
-      <span class="tag">Consortio Fashion Group</span>
-      <p>
-        Online Marketing Specialist at Consortio Fashion Group AB primarily focused on SEO, Web Analytics, and
-        Retargeting (using Criteo). Consortio Fashion Group AB owns the brands Halens, Bubbleroom, Cellbes and
-        Discount24 with websites throughout the nordic countries and eastern Europe.
-      </p>
-      <span class="tag">Jan 2016 > Jul 2018</span>
-      <span class="number">2</span>
-    </article>
-    <!-- end of single timeline item -->
-    <!-- single timeline item -->
-    <article class="timeline-item">
-      <h4>Analyst and Junior Project Manager of SEO</h4>
-      <span class="tag">Carnaby Solutions</span>
-      <p>
-        Hired as a SEO consultant to work with a variety of companies including Booli, Hemnet, Nudie Jeans, Mathem,
-        Tasteline, Aller Media, Vasakronan, Partykungen and Globalrobotparts. Including a graph of convertable
-        traffic in one client's monthly report also led to me becoming the company's go to web analyst.
-      </p>
-      <span class="tag">Mar 2012 > Dec 2015</span>
-      <span class="number">1</span>
-    </article>
-    <!-- end of single timeline item -->
+    <?php
+      $homepageExperience = new WP_Query(array(
+        'posts_per_page' => -1,
+        'post_type' => 'experience',
+        'orderby' => 'date',
+        'order' => 'DESC'
+      ));
+
+      $counter = 9;
+
+      while($homepageExperience->have_posts()): $homepageExperience->the_post();
+        $counter--;
+    ?>
+      <!-- single timeline item -->
+      <article class="timeline-item">
+        <h4><?php the_title(); ?></h4>
+        <span class="tag"><?php get_field('experience_employer') ? the_field('experience_employer') : "---" ?></span>
+        <p>
+          <?php the_excerpt(); ?>
+        </p>
+        <span class="tag">
+          <?php 
+            $startDate = get_field('experience_startDate'); 
+            $endDate = get_field('experience_endDate') ? get_field('experience_endDate') : "Present";
+          
+            echo "$startDate > $endDate";
+          ?>
+        </span>
+        <span class="number"><?php echo $counter; ?></span>
+      </article>
+      <!-- end of single timeline item -->
+    <?php
+      endwhile;
+      wp_reset_postdata();
+    ?>
   </div>
 </section>
 <!--end of  timeline -->

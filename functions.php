@@ -29,6 +29,24 @@
       ),
       'supports' => array('title', 'editor', 'excerpt'),
     ));
+
+    register_post_type('experience', array(
+      'public' => true,
+      'show_in_rest' => true,
+      'labels' => array(
+        'name' => 'Experience',
+        'add_new_item' => 'Add New Experience',
+        'edit_item' => 'Edit Experience',
+        'all_items' => 'All Experience',
+        'singular_name' => 'Experience'
+      ),
+      'menu_icon' => 'dashicons-media-document',
+      'has_archive' => false,
+      'rewrite' => array(
+       'slug' => 'experiences',
+      ),
+      'supports' => array('title', 'editor', 'excerpt'),
+    ));
   }
   add_action('init', 'theme_post_types');
 
