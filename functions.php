@@ -68,6 +68,14 @@
   }
   add_action('init', 'theme_post_types');
 
+  function theme_features() {
+    // Custom menus
+    register_nav_menu('headerMenu', 'Header Menu');
+    // Other features
+    add_theme_support('title-tag');
+  }
+ 
+  add_action('after_setup_theme', 'theme_features');
 
   /* -------------------------------------- */
   /* --------- Custom Functions ----------- */

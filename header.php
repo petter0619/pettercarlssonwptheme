@@ -47,21 +47,15 @@
           </button>
         </div>
         <ul class="nav-links">
+        <?php
+          $menu_items = wp_get_nav_menu_items('header-menu');
+
+          foreach ($menu_items as $item):
+        ?>
           <li>
-            <a href="#onpage-navlink-about">about</a>
+            <a href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
           </li>
-          <li>
-            <a href="#onpage-navlink-latest-work">projects</a>
-          </li>
-          <li>
-            <a href="#onpage-navlink-skills">skills</a>
-          </li>
-          <li>
-            <a href="#onpage-navlink-experience">experience</a>
-          </li>
-          <li>
-            <a href="#onpage-navlink-contact">contact</a>
-          </li>
+        <?php endforeach; ?>
         </ul>
       </div>
     </nav>
