@@ -26,7 +26,7 @@
   </div>
 </header>
 <!-- end of header -->
-<a class="anchor" id="onpage-navlink-about"></a>
+<a class="anchor" id="about"></a>
 <!-- about -->
 <section class="section about">
   <div class="section-center about-center">
@@ -51,7 +51,7 @@
 <section class="section bg-grey">
   <!-- section title -->
   <div class="section-title">
-    <h2>services</h2>
+    <h2>areas of expertise</h2>
     <div class="underline"></div>
   </div>
   <!-- end of section title -->
@@ -83,7 +83,7 @@
 </div>
 </section>
 <!-- end of services -->
-<a class="anchor" id="onpage-navlink-latest-work"></a>
+<a class="anchor" id="projects"></a>
 <!-- projects -->
 <?php 
   $projectsQuery = new WP_Query(array(
@@ -117,7 +117,7 @@
       ?>
         <a href="<?php the_permalink(); ?>" class="project-<?php echo $projectCounter; ?>" target="_blank">
           <article class="project">
-            <img src="<?php echo get_theme_file_uri("/images/move-to-wp/project-section/project-$projectCounter.jpeg"); ?>" alt="single project" class="project-img" />
+            <img src="<?php echo get_theme_file_uri("/images/project-section/project-$projectCounter.jpeg"); ?>" alt="single project" class="project-img" />
             <div class="project-info">
               <h4><?php the_title(); ?></h4>
               <p><?php the_excerpt(); ?></p>
@@ -129,92 +129,44 @@
   </section>
 <?php endif; ?>
 <!-- end of projects -->
-<a class="anchor" id="onpage-navlink-skills"></a>
+<a class="anchor" id="skills"></a>
 <!-- tech stack -->
-<section class="section bg-grey">
-  <!-- section title -->
-  <div class="section-title">
-    <h2>Skills</h2>
-    <div class="underline"></div>
-  </div>
-  <!-- end of section title -->
-  <article class="stack-row">
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <i class="fab fa-html5 tech-logo-icon" aria-hidden="true" style="color: rgb(205, 84, 52)"></i>
-       <p class="tech-logo-text">HTML</p>
+<?php 
+  $skills = [];
+
+  for ($i = 1; $i <= 12; $i++) {
+    $field_value = get_field("skills_skill_$i");
+
+    if (is_null($field_value)) {
+        break;
+    }
+    $skills[] = $field_value;
+  }
+  
+  if (!empty($skills)):
+?>
+  <section class="section bg-grey">
+    <!-- section title -->
+    <div class="section-title">
+      <h2>Tech Stack</h2>
+      <div class="underline"></div>
     </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <i class="fab fa-css3-alt tech-logo-icon" aria-hidden="true" style="color: rgb(54, 154, 214)"></i>
-      <p class="tech-logo-text">CSS</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/skills-icons/sass_logo.png'); ?>" alt="sass" class="tech-logo-img" />
-      <p class="tech-logo-text">SASS</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <i class="fab fa-js tech-logo-icon" aria-hidden="true" style="color: rgb(233, 212, 77)"></i>
-      <p class="tech-logo-text">JavaScript</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/skills-icons/typescript_logo.png'); ?>" alt="typescript" class="tech-logo-img" />
-      <p class="tech-logo-text">TypeScript</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <i class="fab fa-react tech-logo-icon" aria-hidden="true" style="color: rgb(111, 191, 219)"></i>
-      <p class="tech-logo-text">React</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <i class="fab fa-node-js tech-logo-icon" aria-hidden="true" style="color: rgb(144, 197, 63)"></i>
-      <p class="tech-logo-text">Node JS</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/skills-icons/express_logo_2.png'); ?>" alt="express" class="tech-logo-img" />
-      <p class="tech-logo-text">Express</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/skills-icons/c-sharp_logo.png'); ?>" alt="C#" class="tech-logo-img" />
-      <p class="tech-logo-text">C#</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/skills-icons/dotnet-core_logo.png'); ?>" alt=".NET Code" class="tech-logo-img" />
-       <p class="tech-logo-text">.NET Core</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/skills-icons/mongodb_logo.png'); ?>" alt="mongodb" class="tech-logo-img" />
-      <p class="tech-logo-text">MongoDB</p>
-    </div>
-    <!-- end of single technology -->
-    <!-- single technology -->
-    <div class="tech-logo-container">
-      <img src="<?php echo get_theme_file_uri('/images/move-to-wp/skills-icons/sql-server_logo.png'); ?>" alt="sql server" class="tech-logo-img" />
-      <p class="tech-logo-text">SQL Server</p>
-    </div>
-    <!-- end of single technology -->
-  </article>
-</section>
+    <!-- end of section title -->
+    <article class="stack-row">
+      <?php foreach ($skills as $skill):
+      ?>
+        <!-- single technology -->
+        <div class="tech-logo-container">
+          <img src="<?php echo $skill["skill_image"]; ?>" alt="<?php echo $skill["skill_name"]; ?>" class="tech-logo-img" />
+          <p class="tech-logo-text"><?php echo $skill["skill_name"]; ?></p>
+        </div>
+        <!-- end of single technology -->
+      <?php endforeach; ?>
+    </article>
+  </section>
+<?php endif; ?>
 <!--end of tech stack --->
-<a class="anchor" id="onpage-navlink-experience"></a>
+<a class="anchor" id="experience"></a>
 <!-- timeline -->
 <section class="section timeline">
   <!-- section title -->
@@ -262,7 +214,7 @@
   </div>
 </section>
 <!--end of  timeline -->
-<a class="anchor" id="onpage-navlink-contact"></a>
+<a class="anchor" id="contact"></a>
 <!-- connect -->
 <section class="connect">
   <video autoplay muted loop class="video-container" poster="<?php echo get_theme_file_uri('/images/move-to-wp/project-section/project-1.jpeg'); ?>">
