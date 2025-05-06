@@ -1,3 +1,9 @@
+<?php
+  /*
+  Template Name: Front Page
+  */
+?>
+
 <!-- top menu -->
 <?php get_header(); ?>
 <!-- end of top menu -->
