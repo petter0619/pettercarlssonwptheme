@@ -1,0 +1,101 @@
+{
+  "key": "group_67f0dbba733f8",
+  "title": "Experience Post Type",
+  "fields": [
+    {
+      "key": "field_67f0dbba28b8a",
+      "label": "Employer",
+      "name": "experience_employer",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "maxlength": "",
+      "allow_in_bindings": 0,
+      "placeholder": "E.g. Sherlock Holmes Detective Agency",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_67f0dbf628b8b",
+      "label": "Start Date",
+      "name": "experience_startDate",
+      "aria-label": "",
+      "type": "date_picker",
+      "instructions": "",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "display_format": "j F, Y",
+      "return_format": "F Y",
+      "first_day": 1,
+      "allow_in_bindings": 0
+    },
+    {
+      "key": "field_67f0dca728b8c",
+      "label": "End Date",
+      "name": "experience_endDate",
+      "aria-label": "",
+      "type": "date_picker",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "display_format": "j F, Y",
+      "return_format": "F Y",
+      "first_day": 1,
+      "allow_in_bindings": 0
+    },
+    {
+      "key": "field_67f0dd3aab1e7",
+      "label": "Employer URL",
+      "name": "experience_employerUrl",
+      "aria-label": "",
+      "type": "url",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "allow_in_bindings": 0,
+      "placeholder": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "experience"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0
+}
