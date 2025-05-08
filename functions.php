@@ -11,6 +11,9 @@
   }
   add_action('wp_enqueue_scripts', 'theme_scripts_and_stylesheets');
 
+  /* -------------------------------------- */
+  /* -------- Custom Post Types ----------- */
+  /* -------------------------------------- */
   function theme_post_types() {
     register_post_type('service', array(
       'public' => true,
@@ -68,6 +71,9 @@
   }
   add_action('init', 'theme_post_types');
 
+  /* -------------------------------------- */
+  /* ---------- Theme Features ------------ */
+  /* -------------------------------------- */
   function theme_features() {
     // Custom menus
     register_nav_menu('headerMenu', 'Header Menu');
@@ -76,6 +82,34 @@
   }
  
   add_action('after_setup_theme', 'theme_features');
+  
+  /* -------------------------------------- */
+  /* ------- Plugin Dependencies ---------- */
+  /* -------------------------------------- */
+  require_once get_template_directory() . '/tgmpa/class-tgm-plugin-activation.php';
+
+  function my_theme_register_required_plugins() {
+    $plugins = [
+      [
+        'name'     => 'Advanced Custom Fields',
+        'slug'     => 'advanced-custom-fields',
+        'required' => true,
+      ],
+      // You can add more plugins here
+    ];
+
+    $config = [
+      'id'           => 'petter0619', // A unique string to identify your instance of TGMPA. Helps avoid conflicts with other themes/plugins using TGMPA.
+      'menu'         => 'tgmpa-install-plugins', // The slug used for the admin menu item TGMPA creates.
+      'has_notices'  => true, // Whether TGMPA should show admin notices to install/activate plugins.
+      'dismissable'  => false, // Whether the user can dismiss the plugin installation notice.
+      'is_automatic' => false, // Whether plugins should be automatically activated after installation.
+    ];
+
+    tgmpa($plugins, $config);
+  }
+
+  add_action('tgmpa_register', 'my_theme_register_required_plugins');
 
   /* -------------------------------------- */
   /* --------- Custom Functions ----------- */
