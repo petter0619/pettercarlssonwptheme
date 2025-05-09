@@ -81,6 +81,58 @@
   add_action('init', 'theme_post_types');
 
   /* -------------------------------------- */
+  /* ---- Create Pages Upon Activation ---- */
+  /* -------------------------------------- */
+  function create_home_page_on_theme_activation() {
+    // Check if a static front page is already set
+    $front_page_id = get_option('page_on_front');
+    $is_static_front_page = get_option('show_on_front') === 'page';
+
+    // Find any page using 'front-page.php' as its template
+    $existing_front_page = get_pages([
+      'meta_key'   => '_wp_page_template',
+      'meta_value' => 'front-page.php',
+      'number'     => 1,
+      'post_type'  => 'page',
+      'post_status'=> 'publish',
+    ]);
+
+    // If a static front page is already set or another page is using front-page.php, do nothing
+    if ($is_static_front_page && $front_page_id) return;
+    if (!empty($existing_front_page)) return;
+
+    // Otherwise, create a new Home page
+    $home_id = wp_insert_post([
+      'post_title'     => 'Home',
+      'post_type'      => 'page',
+      'post_status'    => 'publish',
+      'post_name'      => 'home',
+      'page_template'  => 'front-page.php',
+    ]);
+
+    // Set the new page as the front page
+    update_option('show_on_front', 'page');
+    update_option('page_on_front', $home_id);
+  }
+
+  add_action('after_switch_theme', 'create_home_page_on_theme_activation');
+
+  function create_global_settings_page() {
+    $page = get_page_by_path('global-settings');
+
+    if (!$page) {
+      $page_id = wp_insert_post([
+        'post_title'     => 'Global Settings',
+        'post_name'      => 'global-settings',
+        'post_status'    => 'publish',
+        'post_type'      => 'page',
+        'page_template'  => 'global-settings.php',
+      ]);
+    }
+  }
+  add_action('after_switch_theme', 'create_global_settings_page');
+
+  /* -------------------------------------- */
   /* ------- Plugin Dependencies ---------- */
   /* -------------------------------------- */
   require_once get_template_directory() . '/tgmpa/class-tgm-plugin-activation.php';
@@ -114,25 +166,39 @@
   if (function_exists('acf_add_local_field_group')) {
     // Global Info
     acf_add_local_field_group([
-        'key' => 'group_global_info',
-        'title' => 'Global Info',
+        'key' => 'group_global_settings',
+        'title' => 'Global Settings',
         'fields' => [
           [
-            'key' => 'field_global_linkedin',
+            'key' => 'field_global_settings_full_name',
+            'label' => 'Full Name',
+            'name' => 'global_settings_full_name',
+            'type' => 'text',
+          ],
+          [
+            'key' => 'field_global_settings_logo',
+            'label' => 'Site Logo',
+            'name' => 'global_settings_logo',
+            'type' => 'image',
+            'return_format' => 'array',
+            'library' => 'all',
+          ],
+          [
+            'key' => 'field_global_settings_linkedin',
             'label' => 'LinkedIn',
-            'name' => 'global_linkedin',
+            'name' => 'global_settings_linkedin',
             'type' => 'text',
           ],
           [
-            'key' => 'field_global_email',
+            'key' => 'field_global_settings_email',
             'label' => 'Email',
-            'name' => 'global_email',
+            'name' => 'global_settings_email',
             'type' => 'text',
           ],
           [
-            'key' => 'field_global_github',
+            'key' => 'field_global_settings_github',
             'label' => 'GitHub',
-            'name' => 'global_github',
+            'name' => 'global_settings_github',
             'type' => 'text',
           ],
         ],
@@ -141,7 +207,7 @@
             [
               'param' => 'page_template',
               'operator' => '==',
-              'value' => 'front-page.php',
+              'value' => 'global-settings.php',
             ],
           ],
         ],

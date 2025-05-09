@@ -40,7 +40,11 @@
         <!-- nav header -->
         <div class="nav-header">
           <a href="#top">
-            <img src="<?php echo esc_url(get_field('global_logo')['url']); ?>" alt="nav logo" class="nav-logo" />
+            <img src="<?php 
+              $settings_page = get_page_by_path('global-settings');
+
+              echo esc_url(get_field('global_settings_logo', $settings_page->ID)['url']); 
+            ?>" alt="nav logo" class="nav-logo" />
           </a>
           <button class="nav-btn" id="nav-btn">
             <i class="fas fa-bars"></i>

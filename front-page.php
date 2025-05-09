@@ -17,10 +17,12 @@
       <a href="<?php echo get_field('header_button')['link']; ?>" class="btn hero-btn"><?php echo get_field('header_button')['text']; ?></a>
       <!-- social icons -->
       <?php 
+        $settings_page = get_page_by_path('global-settings');
+
         get_template_part('partials/socialIconsList', null, array(
-          'linkedin_link' => get_field('global_linkedin'),
-          'github_link' => get_field('global_github'),
-          'email_address' => get_field('global_email'),
+          'linkedin_link' => get_field('global_settings_linkedin', $settings_page->ID),
+          'github_link' => get_field('global_settings_github', $settings_page->ID),
+          'email_address' => get_field('global_settings_email', $settings_page->ID),
           'extra_list_classes' => 'hero-icons',
         ));
       ?>
@@ -228,17 +230,17 @@
     Sorry, your browser does not support embedded videos...
   </video>
   <div class="video-banner">
-  <!-- section title -->
-  <div class="section-title">
-    <h2><?php the_field('contact_section_title'); ?></h2>
-    <div class="underline"></div>
+    <!-- section title -->
+    <div class="section-title">
+      <h2><?php the_field('contact_section_title'); ?></h2>
+      <div class="underline"></div>
+    </div>
+    <!-- end of section title -->
+    <p class="video-text">
+      <?php the_field('contact_section_text'); ?>
+    </p>
+    <a href="<?php echo get_field('contact_section_button')['link']; ?>" class="btn"><?php echo get_field('contact_section_button')['text']; ?></a>
   </div>
-  <!-- end of section title -->
-  <p class="video-text">
-    <?php the_field('contact_section_text'); ?>
-  </p>
-  <a href="<?php echo get_field('contact_section_button')['link']; ?>" class="btn"><?php echo get_field('contact_button')['text']; ?></a>
-</div>
 </section>
 <!-- end of connect -->
 <!-- footer -->
