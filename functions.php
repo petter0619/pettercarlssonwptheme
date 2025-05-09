@@ -133,6 +133,58 @@
   add_action('after_switch_theme', 'create_global_settings_page');
 
   /* -------------------------------------- */
+  /* ---- Create Menus Upon Activation ---- */
+  /* -------------------------------------- */
+  function create_default_header_menu() {
+    // Set the location key from register_nav_menu()
+    $menu_location = 'headerMenu';
+    $menu_name     = 'Header Menu';
+
+    // Check if the menu already exists
+    $menu_exists = wp_get_nav_menu_object($menu_name);
+
+    if (!$menu_exists) {
+      // Create the menu
+      $menu_id = wp_create_nav_menu($menu_name);
+
+      // Add menu items
+      wp_update_nav_menu_item($menu_id, 0, [
+        'menu-item-title'  => 'About',
+        'menu-item-url'    => home_url('/#about'),
+        'menu-item-status' => 'publish',
+      ]);
+
+      wp_update_nav_menu_item($menu_id, 0, [
+        'menu-item-title'  => 'Skills',
+        'menu-item-url'    => home_url('/#skills"'),
+        'menu-item-status' => 'publish',
+      ]);
+
+      wp_update_nav_menu_item($menu_id, 0, [
+        'menu-item-title'  => 'Experience',
+        'menu-item-url'    => home_url('/#experience"'),
+        'menu-item-status' => 'publish',
+      ]);
+
+      wp_update_nav_menu_item($menu_id, 0, [
+        'menu-item-title'  => 'Contact',
+        'menu-item-url'    => home_url('/#contact"'),
+        'menu-item-status' => 'publish',
+      ]);
+
+      // Assign the menu to the theme location
+      $locations = get_theme_mod('nav_menu_locations');
+      if (!is_array($locations)) {
+        $locations = [];
+      }
+      $locations[$menu_location] = $menu_id;
+      set_theme_mod('nav_menu_locations', $locations);
+    }
+  }
+  add_action('after_switch_theme', 'create_default_header_menu');
+
+
+  /* -------------------------------------- */
   /* ------- Plugin Dependencies ---------- */
   /* -------------------------------------- */
   require_once get_template_directory() . '/tgmpa/class-tgm-plugin-activation.php';
