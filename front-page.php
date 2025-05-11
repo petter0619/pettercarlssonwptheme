@@ -1,3 +1,9 @@
+<?php
+  /*
+  Template Name: Front Page
+  */
+?>
+
 <!-- top menu -->
 <?php get_header(); ?>
 <!-- end of top menu -->
@@ -12,9 +18,9 @@
       <!-- social icons -->
       <?php 
         get_template_part('partials/socialIconsList', null, array(
-          'linkedin_link' => get_field('global_linkedin'),
-          'github_link' => get_field('global_github'),
-          'email_address' => get_field('global_email'),
+          'linkedin_link' => get_global_setting('global_settings_linkedin'),
+          'github_link' => get_global_setting('global_settings_github'),
+          'email_address' => get_global_setting('global_settings_email'),
           'extra_list_classes' => 'hero-icons',
         ));
       ?>
@@ -217,22 +223,22 @@
 <a class="anchor" id="contact"></a>
 <!-- connect -->
 <section class="connect">
-  <video autoplay muted loop class="video-container" poster="<?php echo get_theme_file_uri('/images/move-to-wp/project-section/project-1.jpeg'); ?>">
+  <video autoplay muted loop class="video-container" poster="<?php echo get_theme_file_uri('/images/project-section/project-1.jpeg'); ?>">
     <source src="<?php echo get_theme_file_uri('/videos/connect.mp4'); ?>" type="video/mp4" />
     Sorry, your browser does not support embedded videos...
   </video>
   <div class="video-banner">
-  <!-- section title -->
-  <div class="section-title">
-    <h2><?php the_field('contact_section_title'); ?></h2>
-    <div class="underline"></div>
+    <!-- section title -->
+    <div class="section-title">
+      <h2><?php the_field('contact_section_title'); ?></h2>
+      <div class="underline"></div>
+    </div>
+    <!-- end of section title -->
+    <p class="video-text">
+      <?php the_field('contact_section_text'); ?>
+    </p>
+    <a href="<?php echo get_field('contact_section_button')['link']; ?>" class="btn"><?php echo get_field('contact_section_button')['text']; ?></a>
   </div>
-  <!-- end of section title -->
-  <p class="video-text">
-    <?php the_field('contact_section_text'); ?>
-  </p>
-  <a href="<?php echo get_field('contact_section_button')['link']; ?>" class="btn"><?php echo get_field('contact_button')['text']; ?></a>
-</div>
 </section>
 <!-- end of connect -->
 <!-- footer -->
