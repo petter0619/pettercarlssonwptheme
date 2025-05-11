@@ -2,12 +2,10 @@
   <footer class="footer">
       <!-- social icons -->
       <?php 
-        $settings_page = get_page_by_path('global-settings');
-
         get_template_part('partials/socialIconsList', null, array(
-          'linkedin_link' => get_field('global_settings_linkedin', $settings_page->ID),
-          'github_link' => get_field('global_settings_github', $settings_page->ID),
-          'email_address' => get_field('global_settings_email', $settings_page->ID),
+          'linkedin_link' => get_global_setting('global_settings_linkedin'),
+          'github_link' => get_global_setting('global_settings_github'),
+          'email_address' => get_global_setting('global_settings_email'),
         ));
       ?>
       <!-- end of social icons -->

@@ -216,7 +216,7 @@
   /* ---- Advanced Custom Fields Setup ---- */
   /* -------------------------------------- */
   if (function_exists('acf_add_local_field_group')) {
-    // Global Info
+    // Global Settings
     acf_add_local_field_group([
         'key' => 'group_global_settings',
         'title' => 'Global Settings',
@@ -252,6 +252,13 @@
             'label' => 'GitHub',
             'name' => 'global_settings_github',
             'type' => 'text',
+          ],
+          [
+            'key' => 'field_global_settings_google_tag_maaner_id',
+            'label' => 'Google Tag Manager Id',
+            'name' => 'global_settings_gtm_id',
+            'type' => 'text',
+            'placeholder' => 'GTM-ABC123',
           ],
         ],
         'location' => [
@@ -558,6 +565,22 @@
   /* -------------------------------------- */
   /* --------- Custom Functions ----------- */
   /* -------------------------------------- */
+  function get_global_setting($field_name) {
+    static $settings_page_id = null;
+
+    if (is_null($settings_page_id)) {
+      $page = get_page_by_path('global-settings');
+      if (!$page) {
+        trigger_error('Global Settings page not found. Make sure it exists and has the correct slug.', E_USER_WARNING);
+        return null;
+      }
+      $settings_page_id = $page->ID;
+    }
+
+    // Return field value or null if it doesn't exist
+    return get_field($field_name, $settings_page_id) ?: null;
+  }
+
   function console_log($output, $with_script_tags = true) {
     $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . 
   ');';

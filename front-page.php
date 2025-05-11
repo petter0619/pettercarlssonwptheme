@@ -17,12 +17,10 @@
       <a href="<?php echo get_field('header_button')['link']; ?>" class="btn hero-btn"><?php echo get_field('header_button')['text']; ?></a>
       <!-- social icons -->
       <?php 
-        $settings_page = get_page_by_path('global-settings');
-
         get_template_part('partials/socialIconsList', null, array(
-          'linkedin_link' => get_field('global_settings_linkedin', $settings_page->ID),
-          'github_link' => get_field('global_settings_github', $settings_page->ID),
-          'email_address' => get_field('global_settings_email', $settings_page->ID),
+          'linkedin_link' => get_global_setting('global_settings_linkedin'),
+          'github_link' => get_global_setting('global_settings_github'),
+          'email_address' => get_global_setting('global_settings_email'),
           'extra_list_classes' => 'hero-icons',
         ));
       ?>
@@ -225,7 +223,7 @@
 <a class="anchor" id="contact"></a>
 <!-- connect -->
 <section class="connect">
-  <video autoplay muted loop class="video-container" poster="<?php echo get_theme_file_uri('/images/move-to-wp/project-section/project-1.jpeg'); ?>">
+  <video autoplay muted loop class="video-container" poster="<?php echo get_theme_file_uri('/images/project-section/project-1.jpeg'); ?>">
     <source src="<?php echo get_theme_file_uri('/videos/connect.mp4'); ?>" type="video/mp4" />
     Sorry, your browser does not support embedded videos...
   </video>
