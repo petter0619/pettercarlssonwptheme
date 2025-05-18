@@ -104,6 +104,7 @@
   <section class="section projects">
     <!-- section title -->
     <div class="section-title">
+      <!-- @TODO Add ACF Project section to FrontPage template for this title and section text -->
       <h2>latest works</h2>
       <div class="underline"></div>
       <p class="projects-text">
@@ -186,10 +187,12 @@
       $homepageExperience = new WP_Query(array(
         'posts_per_page' => -1,
         'post_type' => 'experience',
+        // @TODO: Change to fetch based on ACF startDate field
         'orderby' => 'date',
         'order' => 'DESC'
       ));
 
+      // @TODO Make dynamic; should be based on $homepageExperience.length
       $counter = 9;
 
       while($homepageExperience->have_posts()): $homepageExperience->the_post();
