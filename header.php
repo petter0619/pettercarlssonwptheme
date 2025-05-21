@@ -78,40 +78,22 @@
         </button>
         <!-- nav links -->
         <ul class="sidebar-links">
-          <li>
-            <a href="#onpage-navlink-about">about</a>
-          </li>
-          <li>
-            <a href="#onpage-navlink-latest-work">projects</a>
-          </li>
-          <li>
-            <a href="#onpage-navlink-skills">skills</a>
-          </li>
-          <li>
-            <a href="#onpage-navlink-experience">experience</a>
-          </li>
-          <li>
-            <a href="#onpage-navlink-contact">contact</a>
-          </li>
+          <?php
+            foreach ($menu_items as $item):
+          ?>
+            <li>
+              <a href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
+            </li>
+          <?php endforeach; ?>
         </ul>
         <!-- social icons -->
-        <ul class="social-icons">
-          <li>
-            <a href="https://www.linkedin.com/in/petter0619/" class="social-icon" target="_blank">
-              <i class="fab fa-linkedin"></i>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/petter0619/" class="social-icon" target="_blank">
-              <i class="fab fa-github"></i>
-            </a>
-          </li>
-          <li>
-            <a href="mailto:petter.carlsson@appliedtechnology.se" class="social-icon">
-              <i class="fas fa-envelope"></i>
-            </a>
-          </li>
-        </ul>
+        <?php 
+          get_template_part('partials/socialIconsList', null, array(
+            'linkedin_link' => get_global_setting('global_settings_linkedin'),
+            'github_link' => get_global_setting('global_settings_github'),
+            'email_address' => get_global_setting('global_settings_email'),
+          ));
+        ?>
       </div>
     </aside>
     <!-- end of sidebar -->
