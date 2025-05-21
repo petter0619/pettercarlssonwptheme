@@ -560,6 +560,29 @@
       ],
       'menu_order' => 2,
     ]);
+
+    // Service Post Type
+    acf_add_local_field_group([
+      'key' => 'group_service_post_stype',
+      'title' => 'Service Post Type',
+      'fields' => [
+        [
+          'key' => 'field_service_icon_classes',
+          'label' => 'Fontawesome (v5.12.1) Icon Classes',
+          'name' => 'service_icon_classes',
+          'type' => 'text',
+        ],
+      ],
+      'location' => [
+        [
+          [
+            'param' => 'post_type',
+            'operator' => '==',
+            'value' => 'service',
+          ],
+        ],
+      ],
+    ]);
   }
 
   /* -------------------------------------- */

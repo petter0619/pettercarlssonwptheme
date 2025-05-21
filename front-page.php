@@ -71,10 +71,12 @@
       ));
 
       while($homepageServices->have_posts()): $homepageServices->the_post();
+        $icon_classes = get_field('service_icon_classes');
+        $icon_classes = $icon_classes ?: 'fas fa-university';
     ?>
       <!-- single service -->
       <article class="service">
-        <i class="fas fa-code service-icon"></i>
+        <i class="<?php echo esc_attr($icon_classes); ?> service-icon"></i>
         <h4><?php the_title(); ?></h4>
         <div class="underline"></div>
         <p>
@@ -187,13 +189,12 @@
       $homepageExperience = new WP_Query(array(
         'posts_per_page' => -1,
         'post_type' => 'experience',
-        // @TODO: Change to fetch based on ACF startDate field
-        'orderby' => 'date',
+        'meta_key' => 'experience_startDate',
+        'orderby' => 'meta_value',
         'order' => 'DESC'
       ));
 
-      // @TODO Make dynamic; should be based on $homepageExperience.length
-      $counter = 9;
+      $counter = $homepageExperience->found_posts + 1;
 
       while($homepageExperience->have_posts()): $homepageExperience->the_post();
         $counter--;
